@@ -1,10 +1,10 @@
 const DEV_SERVER = {
   historyApiFallback: true,
   overlay: true,
-  // stats: 'verbose',
-  // proxy: {
-  //   '/api': 'http://localhost:3000'
-  // },
+  port: 8181,
+  host: "127.0.0.1",
+  disableHostCheck: true,
+  hot: false
 };
 
 module.exports = DEV_SERVER;

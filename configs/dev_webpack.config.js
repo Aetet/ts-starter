@@ -1,6 +1,4 @@
 const DashboardPlugin = require('webpack-dashboard/plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const LiveReloadPlugin = require('webpack-livereload-plugin')
 
 const PATHS = require('./paths')
 const DEV_SERVER = require('./dev_server_config')
@@ -9,7 +7,7 @@ const devWebpackConfig = () => {
   return {
     cache: true,
     devtool: 'eval-source-map',
-    devServer: DEV_SERVER,
+    serve: DEV_SERVER,
 
     context: PATHS.root,
 
@@ -39,7 +37,6 @@ const devWebpackConfig = () => {
         // typescript
         {
           test: /\.(ts|tsx)?$/,
-          include: PATHS.src,
           use: [{
             loader: 'awesome-typescript-loader',
             options: {
@@ -69,18 +66,7 @@ const devWebpackConfig = () => {
     },
 
     plugins: [
-      new DashboardPlugin(),
-      new HtmlWebpackPlugin({
-        template: './src/template/index.html',
-        injection: `
-        <!-- Dependencies -->
-        <script src="./node_modules/react/umd/react.development.js"></script>
-        <script src="./node_modules/react-dom/umd/react-dom.development.js"></script>
-
-        <script src="http://localhost:35729/livereload.js"></script>
-        `
-      }),
-      new LiveReloadPlugin()
+      new DashboardPlugin()
     ],
     externals: {
       'react': 'React',
